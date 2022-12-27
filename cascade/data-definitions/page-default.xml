@@ -1,0 +1,19 @@
+<system-data-structure>
+    <text default="metadata" field-id="50aca59f7f000101357098fcc7b190c5" help-text="Metadata title is the default. Use rich format for HTML formatting" identifier="page-heading-source" label="Page heading source" type="radiobutton">
+        <radio-item label="Metadata title" value="metadata"/>
+        <radio-item label="Rich format" show-fields="page-heading-html" value="html"/>
+    </text>
+    <text configuration="Inline - minimal" field-id="50aca59f7f000101357098fc24ac8f1e" help-text="This overrides the Title field for page heading" identifier="page-heading-html" label="Rich format page heading" required="true" wysiwyg="true"/>
+    <group collapsed="true" identifier="group-content" label="Content Group" multiple="true">
+        <text default="true" field-id="418605dd7f000101357098fc0b93919c" identifier="boolean-visibility" label="Visibility" required="true" type="radiobutton">
+            <radio-item label="On" value="true"/>
+            <radio-item label="Off" value="false"/>
+        </text>
+        <text field-id="418605dd7f000101357098fcb37210bf" identifier="select-content-type" label="Content Type" type="dropdown">
+            <dropdown-item label="Text" show-fields="group-content/text-content" value="text"/>
+            <dropdown-item label="Accordion" show-fields="group-content/group-accordion" value="accordion"/>
+        </text>
+        <text field-id="418605dd7f000101357098fcea55915c" identifier="text-content" label="Text" required="true" wysiwyg="true"/>
+        <shared-field field-id="418605dd7f000101357098fc489f559f" identifier="group-accordion" path="cpt-accordion"/>
+    </group>
+</system-data-structure>

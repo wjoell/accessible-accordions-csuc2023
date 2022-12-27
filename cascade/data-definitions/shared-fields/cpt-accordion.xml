@@ -1,0 +1,23 @@
+<system-data-structure>
+    <group identifier="group-accordion" label="Accordion Group" collapsed="true">
+        <text type="radiobutton" identifier="boolean-acc-group-heading" label="Use Accordion Group Heading?" field-id="4177f4b87f000101357098fcd11dae09" default="false" required="true">
+            <radio-item value="true" label="Yes" show-fields="group-accordion/acc-group-heading"/>
+            <radio-item value="false" label="No" show-fields="group-accordion/panel-hdg-override"/>
+        </text>
+        <text wysiwyg="true" identifier="acc-group-heading" label="Accordion Group Heading" field-id="4177f4b97f000101357098fc4e69a136" required="true" help-text="Creates a level 2 heading that expands and collapses all panels in the group" configuration="Inline - minimal"/>
+        <text type="radiobutton" identifier="panel-hdg-override" label="Panel Heading Level" field-id="410d90b47f000101357098fc0b051e67" default="h2" required="true" help-text="Level 2 is the default. Set a lower level if your accordion group should nest under an existing level 2 or 3 heading on the page. ">
+            <radio-item value="h2" label="h2"/>
+            <radio-item value="h3" label="h3"/>
+            <radio-item value="h4" label="h4"/>
+        </text>
+        <group identifier="group-acc-panel" label="Accordion Panel" multiple="true" collapsed="true">
+            <text type="radiobutton" identifier="status" label="Status" field-id="410d90b47f000101357098fc274c501f" default="true" required="true">
+                <radio-item value="true" label="Collapsed"/>
+                <radio-item value="false" label="Expanded"/>
+                <radio-item value="off" label="Skip / don&#39;t include"/>
+            </text>
+            <text wysiwyg="true" identifier="heading" label="Panel heading" field-id="4177f4b97f000101357098fc9c3905a8" required="true" configuration="Inline - minimal"/>
+            <text wysiwyg="true" identifier="panel-body" label="Panel body" field-id="4177f4b97f000101357098fc62d9c72f" required="true" configuration="Restricted block"/>
+        </group>
+    </group>
+</system-data-structure>
