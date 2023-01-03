@@ -1,0 +1,64 @@
+:root {
+    --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+body {
+    font-family: var(--system-ui);
+    max-width: 60em;
+    margin: 0 auto;
+    display: grid;
+    gap: 1em;
+    grid-template-areas: ". main" "nav main";
+    grid-template-rows: 4em auto;
+    grid-template-columns: 12em auto;
+}
+main {
+    grid-area: main;
+}
+nav[aria-label="Section"] {
+    grid-area: nav;
+}
+nav ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    gap: 1em;
+}
+nav li a {
+    display: block;
+    padding: .7em;
+    border-bottom: 1px solid #ccc;
+}
+nav a[aria-current="true"] {
+    text-decoration: none;
+    font-weight: bold;
+    pointer-events: none;
+}
+nav a:hover {
+    text-decoration: none;
+}
+h1 {
+    grid-area: heading;
+}
+:where(h2, h3, h4) button {
+    all: inherit;
+}
+:is(.accordion-heading, .panel-heading) button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.icon svg {
+    display: flex;
+    align-items: center;
+}
+button div:not(.icon) {
+    flex-grow: 1;
+}
+:is(.accordion-heading, .panel-heading) button .icon{
+    width: 1em;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+}
