@@ -1,7 +1,9 @@
 :root {
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
-
+* {
+    box-sizing: border-box;
+}
 body {
     font-family: var(--system-ui);
     max-width: 60em;
@@ -41,6 +43,18 @@ nav a:hover {
 h1 {
     grid-area: heading;
 }
+:where(h2) {
+    font-size: 1.5em;
+}
+:where(h3) {
+    font-size: 1.25em;
+}
+:where(h4) {
+    font-size: 1em;
+}
+:is(h2.panel-heading, h3.panel-heading, h4.panel-heading) {
+    font-size: 1em;
+}
 :where(h2, h3, h4) button {
     all: inherit;
 }
@@ -49,10 +63,29 @@ h1 {
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    width: 100%;
+    background-color: #eee;
+    border-bottom: 1px solid #ccc;
+    padding: .7em;
+}
+:is(.accordion-heading, .panel-heading) button:hover {
+    background-color: black;
+    color: white;
+}
+:is(.accordion-heading, .panel-heading) button:hover svg {
+    fill: white;
+}
+:is(.accordion-heading, .panel-heading) button:focus {
+    outline: 2px solid AccentColor;
+    outline-offset: 2px;
+    outline: 2px solid -webkit-focus-ring-color;
 }
 .icon svg {
     display: flex;
     align-items: center;
+}
+button[aria-expanded="true"] .icon svg {
+    transform: rotate(45deg);
 }
 button div:not(.icon) {
     flex-grow: 1;
