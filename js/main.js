@@ -11,6 +11,8 @@ var supportsES6 = function() {
 if (supportsES6) {
     rootElement.classList.add("es6", "js");
     rootElement.classList.remove("no-js", "no-es");
+
+    // SVG Icon Renderer
     let createSVGtoggleIcon = function() {
         let iconWrap = document.createElement('div');
         let toggleIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -31,6 +33,8 @@ if (supportsES6) {
         iconWrap.appendChild(toggleIcon);
         return iconWrap;
     }
+
+    // Find all accordions; add buttons and icons
     const accordionHeadings = document.querySelectorAll('.accordion-heading');
     if (accordionHeadings.length > 0) {
         for(let heading of accordionHeadings) {
@@ -41,7 +45,7 @@ if (supportsES6) {
             let textWrap = document.createElement("div");
             textWrap.append(headingText);
             btn.setAttribute("aria-expanded", "false");
-            btn.setAttribute("aria-label", "Expand all " + headingText + " accordion sections");
+            btn.setAttribute("aria-label", `Expand all ${headingText} accordion sections`);
             btn.append(textWrap);
             btn.append(svgIcon);
             heading.append(btn);
@@ -75,24 +79,29 @@ if (supportsES6) {
             }
         }
     }
+
+    // Click event listeners for accordion headings
     document.addEventListener('click', function(event) {
-        if (event.target.matches('.panel-heading button, .panel-heading button *')) {
+        if (event.target.closest('.panel-heading button')) {
             let target = event.target.closest('button');
             let accordionItem = target.closest('.accordion-item');
-            let accordionHeading = accordionItem.querySelector('.panel-heading');
+            let panelHeading = accordionItem.querySelector('.panel-heading');
             let accordionContent = accordionItem.querySelector('.accordion-content');
             let panelDisplay = accordionContent.hidden;
             if (panelDisplay == true) {
                 accordionContent.hidden = false;
                 target.setAttribute("aria-expanded", "true");
-                accordionHeading.dataset['accordionCollapsed'] = "false";
+                panelHeading.dataset['accordionCollapsed'] = "false";
+                history.pushState(null, null, `#${panelHeading.getAttribute('id')}`);
+                target.closest('.panel-heading').scrollIntoView();
             } else {
                 accordionContent.hidden = true;
                 target.setAttribute("aria-expanded", "false");
-                accordionHeading.dataset['accordionCollapsed'] = "true";
+                panelHeading.dataset['accordionCollapsed'] = "true";
+                history.replaceState(null, null, ' ');
             }
         }
-        if (event.target.matches('.accordion-heading button, .accordion-heading button *')) {
+        if (event.target.closest('.accordion-heading button')) {
             let target = event.target.closest('button');
             let accordionContainer = target.closest('.cpt-accordion');
             let accordionItems = accordionContainer.querySelectorAll('.accordion-item');
@@ -101,20 +110,59 @@ if (supportsES6) {
             if (accordionHeadingButton.getAttribute("aria-expanded") == "true") {
                 accordionHeading.dataset['accordionCollapsed'] = "true";
                 accordionHeadingButton.setAttribute("aria-expanded", "false");
+                history.replaceState(null, null, ' ');
                 for (let item of accordionItems) {
                     item.querySelector('.accordion-content').hidden = true;
-                    item.querySelector('.panel-heading').dataset['accordionCollapsed'] = "false";
+                    item.querySelector('.panel-heading').dataset['accordionCollapsed'] = "true";
                     item.querySelector('button').setAttribute("aria-expanded", "false");
                 }
             } else {
                 accordionHeading.dataset['accordionCollapsed'] = "false";
                 accordionHeadingButton.setAttribute("aria-expanded", "true");
+                history.pushState(null, null, `#${accordionHeading.getAttribute('id')}`);
+                accordionHeading.scrollIntoView();
                 for (let item of accordionItems) {
                     item.querySelector('.accordion-content').hidden = false;
-                    item.querySelector('.panel-heading').dataset['accordionCollapsed'] = "true";
+                    item.querySelector('.panel-heading').dataset['accordionCollapsed'] = "false";
                     item.querySelector('button').setAttribute("aria-expanded", "true");
                 }
             }
         }
     }, false);
+
+    // If the user presses F3 or Ctrl+F, expand all accordions
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'F3' || ((event.ctrlKey || event.metaKey) && event.key === 'f')) {
+            const accordions = document.querySelectorAll('.cpt-accordion');
+            if (accordions.length > 0) {
+                for (let accordion of accordions) {
+                    if (accordion.querySelector('.accordion-heading button') !== null) {
+                        let accordionHeading = accordion.querySelector('.accordion-heading');
+                        let accordionHeadingButton = accordionHeading.querySelector('button');
+                        accordionHeading.dataset['accordionCollapsed'] = "false";
+                        accordionHeadingButton.setAttribute("aria-expanded", "true");
+                        accordionHeadingButton.setAttribute("aria-label", accordionHeadingButton.getAttribute("aria-label").replace("Expand", "Collapse"));
+                    }
+                    let accordionItems = accordion.querySelectorAll('.accordion-item');
+                    for (let item of accordionItems) {
+                        let panelHeading = item.querySelector('.panel-heading');
+                        let panelContent = item.querySelector('.accordion-content');
+                        let panelHeadingButton = panelHeading.querySelector('button');
+                        panelContent.hidden = false;
+                        panelHeading.dataset['accordionCollapsed'] = "false";
+                        panelHeadingButton.setAttribute("aria-expanded", "true");
+                    }
+                }
+            }
+        }
+    }, false);
+
+    // Hash events - this could use some more tests and specificity for just accordion matches
+    if (window.location.hash !== '') {
+        let target = document.querySelector(`${window.location.hash} button`);
+        if (target !== null && target.closest('.panel-heading, .accordion-heading') !== null) {
+            target.click();
+            target.closest('.panel-heading, .accordion-heading').scrollIntoView();
+        }
+    }
 }
