@@ -1,47 +1,24 @@
-:root {
-    --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+@media (prefers-reduced-motion) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 * {
     box-sizing: border-box;
 }
-body {
-    font-family: var(--system-ui);
-    max-width: 60em;
-    margin: 0 auto;
-    display: grid;
-    gap: 1em;
-    grid-template-areas: ". main" "nav main";
-    grid-template-rows: 4em auto;
-    grid-template-columns: 12em auto;
+/* Typography base */
+:root {
+    --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
-main {
-    grid-area: main;
-}
-nav[aria-label="Section"] {
-    grid-area: nav;
-}
-nav ul {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    padding: 0;
-    gap: 1em;
-}
-nav li a {
-    display: block;
-    padding: .7em;
-    border-bottom: 1px solid #ccc;
-}
-nav a[aria-current="true"] {
-    text-decoration: none;
-    font-weight: bold;
-    pointer-events: none;
-}
-nav a:hover {
-    text-decoration: none;
-}
-h1 {
-    grid-area: heading;
+:where(h1) {
+    font-size: 2em;
 }
 :where(h2) {
     font-size: 1.5em;
@@ -52,8 +29,54 @@ h1 {
 :where(h4) {
     font-size: 1em;
 }
-:is(h2.panel-heading, h3.panel-heading, h4.panel-heading) {
+body {
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    font-family: var(--system-ui);
+}
+
+/* Navigation */
+nav[aria-label="Section"] {
+    background: black;
+    color: white
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    gap: 1em;
+}
+nav a {
+    display: block;
+    padding: .7em;
+    color: white;
+}
+nav a:visited {
+    color: silver;
+}
+nav a[aria-current="true"] {
+    text-decoration: none;
+    font-weight: bold;
+    pointer-events: none;
+}
+nav a:hover {
+    color: white;
+    text-decoration: none;
+}
+h1 {
+    grid-area: heading;
+}
+/* Accordions */
+.cpt-accordion {
+    border-bottom: 4px solid #333;
+}
+.es6 :is(h2.panel-heading, h3.panel-heading, h4.panel-heading) {
     font-size: 1em;
+    padding-right: 0;
 }
 :where(h2, h3, h4) button {
     all: inherit;
@@ -68,6 +91,9 @@ h1 {
     border-bottom: 1px solid #ccc;
     padding: .7em;
 }
+.accordion-heading button {
+    padding-right: .25em;
+}
 :is(.accordion-heading, .panel-heading) button:hover {
     background-color: black;
     color: white;
@@ -77,12 +103,13 @@ h1 {
 }
 :is(.accordion-heading, .panel-heading) button:focus {
     outline: 2px solid AccentColor;
-    outline-offset: 2px;
     outline: 2px solid -webkit-focus-ring-color;
+    outline-offset: 2px;
 }
 .icon svg {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 button[aria-expanded="true"] .icon svg {
     transform: rotate(45deg);
@@ -91,7 +118,93 @@ button div:not(.icon) {
     flex-grow: 1;
 }
 :is(.accordion-heading, .panel-heading) button .icon{
-    width: 1em;
+    width: 1.5em;
     aspect-ratio: 1;
     flex-shrink: 0;
+}
+:is(.accordion-heading, .panel-heading):target button {
+    color: white;
+    background-color: #333;
+}
+:is(.accordion-heading, .panel-heading):target button .icon svg {
+    fill: white;
+}
+
+/* Layout */
+
+body {
+    max-width: 60em;
+    margin: 0 1em 3em;
+}
+@media screen and (min-width: 40em) {
+    body {
+        display: grid;
+        gap: 1em;
+        grid-template-areas: ". main" "nav main";
+        grid-template-rows: 4em auto;
+        grid-template-columns: 12em auto;
+    }
+    main {
+        grid-area: main;
+    }
+    nav[aria-label="Section"] {
+        grid-area: nav;
+        background: transparent;
+    }
+    nav[aria-label="Section"] ul {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    nav a:link {
+        color: blue;
+        border-bottom: 1px solid #ccc;
+    }
+    nav a:visited {
+        color: rebeccapurple;
+    }
+    nav a:hover {
+        color: #333;
+    }
+}
+@media print {
+    nav[aria-label="Section"] {
+        background: transparent;
+        border-bottom: 1px solid black;
+    }
+    nav a[aria-current="true"] {
+        text-decoration: underline overline;
+        text-underline-offset: 0.3em;
+        border-bottom: none;
+        color: black;
+    }
+    nav a:link:not([aria-current="true"]) {
+        color: black;
+        border-bottom: none;
+        text-decoration: none;
+    }
+    nav a:visited {
+        color: black;
+    }
+    :is(.accordion-heading, .panel-heading) button {
+        display: block;
+        width: 100%;
+        background-color: transparent;
+        border:none;
+        padding: 0;
+    }
+    .icon {
+        display: none;
+    }
+    :is(.accordion-content, .accordion-content[hidden]) {
+        display: block;
+    }
+    :is(h2.panel-heading) {
+        font-size: 1.5em;
+    }
+    :is(h3.panel-heading) {
+        font-size: 1.25em;
+    }
+    :is(h4.panel-heading) {
+        font-size: 1em;
+    }
 }
