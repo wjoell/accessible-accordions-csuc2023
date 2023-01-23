@@ -33,49 +33,54 @@ if (supportsES6) {
         iconWrap.appendChild(toggleIcon);
         return iconWrap;
     }
+    /***
+     * Create a button wrapper and icon for an accordion heading
+     * 
+     * @param headingElement {Node} - The heading element to update with button and icon
+     * @param useAriaLabel {Boolean} - Use an aria-label on the button for accordion group headings
+     * 
+     * @returns {Node} - The updated heading element
+     */
+    let createHeadingButton = function(headingElement, useAriaLabel) {
+        let svgIcon = createSVGtoggleIcon();
+        let removeSpan = headingElement.querySelector("span");
+        let textWrap = document.createElement("div");
+        removeSpan.hasChildNodes() ? textWrap.innerHTML = removeSpan.innerHTML : textWrap.append(removeSpan.textContent);
+        let headingTextAttr = removeSpan.textContent;
+        let btn = document.createElement("button");
+        btn.setAttribute("aria-expanded", "false");
+        if (useAriaLabel) {
+            btn.setAttribute("aria-label", `Expand all ${headingTextAttr} accordion sections`);
+        }
+        btn.append(textWrap);
+        btn.append(svgIcon);
+        headingElement.append(btn);
+        removeSpan.remove();
+        return headingElement;
+    }
 
     // Find all accordions; add buttons and icons
     const accordionHeadings = document.querySelectorAll('.accordion-heading');
     if (accordionHeadings.length > 0) {
         for(let heading of accordionHeadings) {
-            let svgIcon = createSVGtoggleIcon();
-            let removeSpan = heading.querySelector("span");
-            let headingText = removeSpan.innerText;
-            let btn = document.createElement("button");
-            let textWrap = document.createElement("div");
-            textWrap.append(headingText);
-            btn.setAttribute("aria-expanded", "false");
-            btn.setAttribute("aria-label", `Expand all ${headingText} accordion sections`);
-            btn.append(textWrap);
-            btn.append(svgIcon);
-            heading.append(btn);
-            removeSpan.remove();
+            createHeadingButton(heading, true);
         }
     }
     const accordionItems = document.querySelectorAll(".accordion-item");
     if (accordionItems.length > 0) {
         for(let item of accordionItems) {
             if (item.querySelector(".panel-heading") !== null) { // if this fails, fail early
-                let svgIcon = createSVGtoggleIcon();
-                let panelHeading = item.querySelector(".panel-heading"); 
-                let removeSpan = panelHeading.querySelector("span");
-                let headingText = removeSpan.hasChildNodes() ? removeSpan.innerHTML : removeSpan.innerText;
+                let panelHeading = item.querySelector(".panel-heading");
+                createHeadingButton(panelHeading, false);
                 let panelContent = item.querySelector(".accordion-content");
                 let panelDisplay = panelHeading.dataset['accordionCollapsed'];
-                let btn = document.createElement("button");
-                let textWrap = document.createElement("div");
                 if (panelDisplay == "true") {
                     panelContent.hidden = true;
-                    btn.setAttribute("aria-expanded", "false");
+                    panelHeading.querySelector('button').setAttribute("aria-expanded", "false");
                 } else {
                     panelContent.hidden = false;
-                    btn.setAttribute("aria-expanded", "true");
+                    panelHeading.querySelector('button').setAttribute("aria-expanded", "true");
                 }
-                textWrap.innerHTML = headingText;
-                btn.append(textWrap);
-                btn.append(svgIcon);
-                panelHeading.append(btn);
-                removeSpan.remove();
             }
         }
     }
@@ -110,6 +115,8 @@ if (supportsES6) {
             if (accordionHeadingButton.getAttribute("aria-expanded") == "true") {
                 accordionHeading.dataset['accordionCollapsed'] = "true";
                 accordionHeadingButton.setAttribute("aria-expanded", "false");
+                let accordionHeadingButtonLabel = accordionHeadingButton.getAttribute("aria-label");
+                accordionHeadingButton.setAttribute("aria-label", accordionHeadingButtonLabel.replace("Collapse", "Expand"));
                 history.replaceState(null, null, ' ');
                 for (let item of accordionItems) {
                     item.querySelector('.accordion-content').hidden = true;
@@ -119,6 +126,8 @@ if (supportsES6) {
             } else {
                 accordionHeading.dataset['accordionCollapsed'] = "false";
                 accordionHeadingButton.setAttribute("aria-expanded", "true");
+                let accordionHeadingButtonLabel = accordionHeadingButton.getAttribute("aria-label");
+                accordionHeadingButton.setAttribute("aria-label", accordionHeadingButtonLabel.replace("Expand", "Collapse"));
                 history.pushState(null, null, `#${accordionHeading.getAttribute('id')}`);
                 accordionHeading.scrollIntoView();
                 for (let item of accordionItems) {
@@ -157,7 +166,7 @@ if (supportsES6) {
         }
     }, false);
 
-    // Hash events - this could use some more tests and specificity for just accordion matches
+    // Hash events
     if (window.location.hash !== '') {
         let target = document.querySelector(`${window.location.hash} button`);
         if (target !== null && target.closest('.panel-heading, .accordion-heading') !== null) {
