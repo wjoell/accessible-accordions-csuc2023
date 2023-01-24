@@ -59,13 +59,13 @@ if (supportsES6) {
 
     // Find all accordions; add buttons and icons
     const accordionHeadings = document.querySelectorAll('.accordion-heading');
-    if (accordionHeadings.length > 0) {
+    if (accordionHeadings !== null) {
         for(let heading of accordionHeadings) {
             createHeadingButton(heading, true);
         }
     }
     const accordionItems = document.querySelectorAll(".accordion-item");
-    if (accordionItems.length > 0) {
+    if (accordionItems !== null) {
         for(let item of accordionItems) {
             if (item.querySelector(".panel-heading") !== null) { // if this fails, fail early
                 let panelHeading = item.querySelector(".panel-heading");
@@ -141,7 +141,7 @@ if (supportsES6) {
     document.addEventListener('keydown', function(event) {
         if (event.key === 'F3' || ((event.ctrlKey || event.metaKey) && event.key === 'f')) {
             const accordions = document.querySelectorAll('.cpt-accordion');
-            if (accordions.length > 0) {
+            if (accordions !== null) {
                 for (let accordion of accordions) {
                     if (accordion.querySelector('.accordion-heading button') !== null) {
                         let accordionHeading = accordion.querySelector('.accordion-heading');
