@@ -42,11 +42,10 @@ if (supportsES6) {
      * @returns {Node} - The updated heading element
      */
     let createHeadingButton = function(headingElement, useAriaLabel) {
+        if (headingElement.querySelector("span") === null) return; // fail early if there's no text to wrap
         let svgIcon = createSVGtoggleIcon();
-        let removeSpan = headingElement.querySelector("span");
-        let textWrap = document.createElement("div");
-        removeSpan.hasChildNodes() ? textWrap.innerHTML = removeSpan.innerHTML : textWrap.append(removeSpan.textContent);
-        let headingTextAttr = removeSpan.textContent;
+        let textWrap = headingElement.querySelector("span");
+        let headingTextAttr = textWrap.textContent; // grab a text version for aria-label in case there are child nodes
         let btn = document.createElement("button");
         btn.setAttribute("aria-expanded", "false");
         if (useAriaLabel) {
@@ -55,7 +54,6 @@ if (supportsES6) {
         btn.append(textWrap);
         btn.append(svgIcon);
         headingElement.append(btn);
-        removeSpan.remove();
         return headingElement;
     }
 
