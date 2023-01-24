@@ -127,12 +127,12 @@ if (supportsES6) {
                 let accordionHeadingButtonLabel = accordionHeadingButton.getAttribute("aria-label");
                 accordionHeadingButton.setAttribute("aria-label", accordionHeadingButtonLabel.replace("Expand", "Collapse"));
                 history.pushState(null, null, `#${accordionHeading.getAttribute('id')}`);
-                accordionHeading.scrollIntoView();
                 for (let item of accordionItems) {
                     item.querySelector('.accordion-content').hidden = false;
                     item.querySelector('.panel-heading').dataset['accordionCollapsed'] = "false";
                     item.querySelector('button').setAttribute("aria-expanded", "true");
                 }
+                accordionHeading.scrollIntoView();
             }
         }
     }, false);
