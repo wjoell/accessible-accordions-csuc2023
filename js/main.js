@@ -45,10 +45,10 @@ if (supportsES6) {
         if (headingElement.querySelector("span") === null) return; // fail early if there's no text to wrap
         let svgIcon = createSVGtoggleIcon();
         let textWrap = headingElement.querySelector("span");
-        let headingTextAttr = textWrap.textContent; // grab a text version for aria-label in case there are child nodes
         let btn = document.createElement("button");
         btn.setAttribute("aria-expanded", "false");
         if (useAriaLabel) {
+            let headingTextAttr = textWrap.textContent; // grab a text version for aria-label in case there are child nodes
             btn.setAttribute("aria-label", `Expand all ${headingTextAttr} accordion sections`);
         }
         btn.append(textWrap);
