@@ -1,23 +1,23 @@
 <system-data-structure>
-    <group identifier="group-accordion" label="Accordion Group" collapsed="true">
-        <text type="radiobutton" identifier="boolean-acc-group-heading" label="Use Accordion Group Heading?" field-id="4177f4b87f000101357098fcd11dae09" default="false" required="true">
-            <radio-item value="true" label="Yes" show-fields="group-accordion/acc-group-heading"/>
-            <radio-item value="false" label="No" show-fields="group-accordion/panel-hdg-override"/>
-        </text>
-        <text wysiwyg="true" identifier="acc-group-heading" label="Accordion Group Heading" field-id="4177f4b97f000101357098fc4e69a136" required="true" help-text="Creates a level 2 heading that expands and collapses all panels in the group" configuration="Inline - minimal"/>
-        <text type="radiobutton" identifier="panel-hdg-override" label="Panel Heading Level" field-id="410d90b47f000101357098fc0b051e67" default="h2" required="true" help-text="Level 2 is the default. Set a lower level if your accordion group should nest under an existing level 2 or 3 heading on the page. ">
-            <radio-item value="h2" label="h2"/>
-            <radio-item value="h3" label="h3"/>
-            <radio-item value="h4" label="h4"/>
-        </text>
-        <group identifier="group-acc-panel" label="Accordion Panel" multiple="true" collapsed="true">
-            <text type="radiobutton" identifier="status" label="Status" field-id="410d90b47f000101357098fc274c501f" default="true" required="true">
-                <radio-item value="true" label="Collapsed"/>
-                <radio-item value="false" label="Expanded"/>
-                <radio-item value="off" label="Skip / don&#39;t include"/>
-            </text>
-            <text wysiwyg="true" identifier="heading" label="Panel heading" field-id="4177f4b97f000101357098fc9c3905a8" required="true" configuration="Inline - minimal"/>
-            <text wysiwyg="true" identifier="panel-body" label="Panel body" field-id="4177f4b97f000101357098fc62d9c72f" required="true" configuration="Restricted block"/>
-        </group>
-    </group>
+	<group collapsed="true" identifier="group-accordion" label="Accordion Group">
+		<text default="false" help-text="Accordion group headings can expand and collapse all the accordions in its group" identifier="boolean-acc-group-heading" label="Use Accordion Group Heading?" required="true" type="radiobutton">
+			<radio-item label="Yes" show-fields="group-accordion/acc-group-heading" value="true"/>
+			<radio-item label="No" show-fields="group-accordion/panel-hdg-override" value="false"/>
+		</text>
+		<text configuration="Inline - minimal" help-text="Creates a level 2 heading that expands and collapses all panels in the group" identifier="acc-group-heading" label="Accordion Group Heading" required="true" wysiwyg="true"/>
+		<text default="h2" help-text="Level 2 is the default. Set a lower level if your accordion group should nest under an existing level 2 or 3 heading on the page. " identifier="panel-hdg-override" label="Panel Heading Level" required="true" type="radiobutton">
+			<radio-item label="h2" value="h2"/>
+			<radio-item label="h3" value="h3"/>
+			<radio-item label="h4" value="h4"/>
+		</text>
+		<group collapsed="true" identifier="group-acc-panel" label="Accordion Panel" multiple="true">
+			<text default="true" identifier="status" label="Status" required="true" type="radiobutton">
+				<radio-item label="Collapsed" show-fields="group-accordion/group-acc-panel/heading, group-accordion/group-acc-panel/panel-body" value="true"/>
+				<radio-item label="Expanded" show-fields="group-accordion/group-acc-panel/heading, group-accordion/group-acc-panel/panel-body" value="false"/>
+				<radio-item label="Skip / don't include" value="off"/>
+			</text>
+			<text configuration="Inline - minimal" identifier="heading" label="Panel heading" required="true" wysiwyg="true"/>
+			<text configuration="Restricted block" identifier="panel-body" label="Panel body" required="true" wysiwyg="true"/>
+		</group>
+	</group>
 </system-data-structure>
