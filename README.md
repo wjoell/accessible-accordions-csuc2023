@@ -18,6 +18,11 @@ If you find something broken, or implemented in a tragically misguided way, open
 
 [Collapsible Sections](https://inclusive-components.design/collapsible-sections/) — Heydon Pickering's *Inclusive Components*
 
+## Downloads
+
+* [Slide Deck (PDF, 1.16MB)](https://github.com/wjoell/accessible-accordions-csuc2023/blob/main/slides/accessible-accordions-winston-churchill-joell.pdf)
+* [Accessible Accordions CPT Cascade Server site](https://github.com/wjoell/accessible-accordions-csuc2023/blob/main/cascade/Accessible%20Accordions%20CPT.csse.zip) (compatible with Cascade Server version 8.22)
+
 ## Sites, Articles, and Videos
 
 * [Java String Reference](https://www.w3schools.com/java/java_ref_string.asp) - not an endorsement of the site, but this article is particularly useful
