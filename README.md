@@ -32,6 +32,14 @@ If you find something broken, or implemented in a tragically misguided way, open
 * [Inclusive Components](https://inclusive-components.design/) — Heydon Pickering’s book and examples
 * [HTTP203 - DOM ready events considered harmful](https://www.youtube.com/watch?v=_iq1fPjeqMQ&list=PLNYkxOF6rcIAKIQFsNbV0JDws_G_bnNo9&index=6) — Jake Archibald and Cassie Evans talk about how `DOMContentLoaded` doesn’t do that what you might think it does.
 
+## Accessibility Testing Tools
+
+Aside from the excellent accessibility developer tools built right into [Chrome](https://developer.chrome.com/docs/devtools/accessibility/reference/) and [Firefox](https://firefox-source-docs.mozilla.org/devtools-user/accessibility_inspector/), below are a few tools I reach for when testing for accessibility issues.
+
+* [TPGArc](https://www.tpgarc.com/) — Affordable and excellent tool for ongoing monitoring of a targeted set of page templates and/or components.
+* [Deque aXe](https://www.deque.com/axe/) — Feature-rich browser extension for inspecting and analyzing accessibility issues.
+* [Colour Contrast Analyser](https://www.tpgi.com/color-contrast-checker/) — Free tool from the Paciello Group that helps test foreground/background color contrast for AA and AAA WCAG conformance.
+
 ## People I Read and Follow
 
 Far from complete, this is a list of folks whom I continue to learn from and whose work I admire.
@@ -50,7 +58,7 @@ Far from complete, this is a list of folks whom I continue to learn from and who
 * **Val Head** — [Val Head](https://valhead.com/) — Web animation expert.
 * **Una Kravets** — [✨Home | Una Kravets Online✨](https://una.im/) — Web developer advocate at Google; co-host of the [CSS Podcast](https://thecsspodcast.libsyn.com/) with Adam Argyle.
 * **Scott O’Hara** — [Scott O’Hara - Accessibility engineer, UX developer and designer | scottohara.me](https://www.scottohara.me/)
-* **Heydon Pickering** — [You have arrived at a website named heydonworks.com: HeydonWorks](https://heydonworks.com/) - Co-creator of Every Layout with Andy Bell; author of [Inclusive Components](https://inclusive-components.design/); and creator of the absolutely priceless [Webbed Briefs](https://briefs.video/).
+* **Heydon Pickering** — [You have arrived at a website named heydonworks.com: HeydonWorks](https://heydonworks.com/) - Co-creator of Every Layout with Andy Bell; author of [*Inclusive Components*](https://inclusive-components.design/); and creator of the absolutely priceless [Webbed Briefs](https://briefs.video/).
 * **Kevin Powell** — [Kevin Powell | CSS Evangelist](https://www.kevinpowell.co/) — Generous and prolific content creator on [YouTube](https://www.youtube.com/kevinpowell) about all things CSS.
 * **Morten Rand-Hendriksen** — [A repository of Morten Rand-Hendriksen’s thoughts - MOR10](https://mor10.com/) — Web designer and developer; LinkedIn Learning instructor; author and speaker. One of my favorite content creators on the web.
 * **Adrian Rosselli** — [Adrian Roselli — Consultant, Writer, Speaker](https://adrianroselli.com/) — Accessibility advocate and expert.
@@ -59,4 +67,4 @@ Far from complete, this is a list of folks whom I continue to learn from and who
 * **Sara Soueidan** — [The personal Web site of Sara Soueidan — inclusive design engineer and trainer – Sara Soueidan, inclusive design engineer](https://www.sarasoueidan.com/) — Author, instructor, and frequent conference speaker on inclusive web design and development.
 * **Surma** — [surma.dev](https://surma.dev/) — Former co-host of HTTP203. Developer experience and web platform advocate.
 * **Marcy Sutton** — [Home | MarcySutton.com](https://marcysutton.com/) — Web designer and developer, instructor and author focused on web accessibility.
-* **Lea Verou** — [Lea Verou – Life at the bleeding edge (of web standards)](https://lea.verou.me/) — Author of CSS Secrets: Better Solutions to Everyday Web Design Problems; member of the W3C Technical Architecture Group and CSS Working Group.
+* **Lea Verou** — [Lea Verou – Life at the bleeding edge (of web standards)](https://lea.verou.me/) — Author of *CSS Secrets: Better Solutions to Everyday Web Design Problems*; member of the W3C Technical Architecture Group and CSS Working Group.
