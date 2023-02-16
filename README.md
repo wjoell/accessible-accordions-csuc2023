@@ -31,6 +31,7 @@ If you find something broken, or implemented in a tragically misguided way, open
 * [A Modern CSS Reset | Andy Bell](https://andy-bell.co.uk/a-modern-css-reset/) — minimal approach that’s easy to understand
 * [Inclusive Components](https://inclusive-components.design/) — Heydon Pickering’s book and examples
 * [HTTP203 - DOM ready events considered harmful](https://www.youtube.com/watch?v=_iq1fPjeqMQ&list=PLNYkxOF6rcIAKIQFsNbV0JDws_G_bnNo9&index=6) — Jake Archibald and Cassie Evans talk about how `DOMContentLoaded` doesn’t do that what you might think it does.
+* [Accessibility: the land that time to interactive forgot | Léonie Watson | performance.now() 2022](https://youtu.be/tQkPog-stj8) — Léonie Watson talks about how web performance impacts accessibility
 
 ## Accessibility Testing Tools
 
@@ -68,3 +69,4 @@ Far from complete, this is a list of folks whom I continue to learn from and who
 * **Surma** — [surma.dev](https://surma.dev/) — Former co-host of HTTP203. Developer experience and web platform advocate.
 * **Marcy Sutton** — [Home | MarcySutton.com](https://marcysutton.com/) — Web designer and developer, instructor and author focused on web accessibility.
 * **Lea Verou** — [Lea Verou – Life at the bleeding edge (of web standards)](https://lea.verou.me/) — Author of *CSS Secrets: Better Solutions to Everyday Web Design Problems*; member of the W3C Technical Architecture Group and CSS Working Group.
+* **Léonie Watson** — [Tink - Léonie Watson - On technology, food & life in the digital age](https://tink.uk/) — Director of  [TetraLogical](https://tetralogical.com/); a member of the [W3C Board of Directors](https://www.w3.org/governance/board/); and co-Chair of the W3C Web Applications Working Group.
